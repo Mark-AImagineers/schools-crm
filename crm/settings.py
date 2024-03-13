@@ -155,3 +155,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TENANT_MODEL = "global_app.Client"
 
 TENANT_DOMAIN_MODEL = "global_app.Domain"
+
+PUBLIC_SCHEMA_URLCONF = "global_app.urls"
