@@ -5,8 +5,8 @@ from .models import *
 
 @admin.register(Client)
 class TenantAdmin(admin.ModelAdmin):
-    list_display = ('tenant_name', 'tenant_updated_at')
+    list_display = ('name', 'created_on')
 
 @admin.register(Domain)
 class DomainAdmin(admin.ModelAdmin):
-    list_display = ('domain_name', 'domain_updated_at')
+    list_display = ('domain', 'tenant_id')
