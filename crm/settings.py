@@ -86,11 +86,24 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-}
+ON_HEROKU = 'DATABASE_URL' in os.environ
 
-DATABASES['default']['ENGINE'] = 'django_tenants.postgresql_backend'
+if ON_HEROKU:
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    }
+    DATABASES['default']['ENGINE'] = 'django_tenants.postgresql_backend'
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django_tenants.postgresql_backend',
+            'NAME': 'schoolscrm',
+            'USER': 'postgres',
+            'PASSWORD': '0902',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',

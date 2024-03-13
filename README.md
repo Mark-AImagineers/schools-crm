@@ -34,3 +34,4 @@ School-CRM includes a wide range of features designed to facilitate the operatio
 
 ### PIPELINE
 - Implement a logging mechanism - heroku logs are too noisy
+- create a logic that will duplicate heroku postgres data to local - only for admin
