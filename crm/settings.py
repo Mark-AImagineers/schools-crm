@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['.herokuapp.com', 'localhost']
 
 SHARED_APPS = [
     'django_tenants',
-    'global_app'
+    'global_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,6 +137,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TENANT_MODEL = "global.Client"
+TENANT_MODEL = "global_app.Client"
 
-TENANT_DOMAIN_MODEL = "global.Domain"
+TENANT_DOMAIN_MODEL = "global_app.Domain"
