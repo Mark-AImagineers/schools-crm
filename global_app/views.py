@@ -27,10 +27,10 @@ def create_tenant_page(request):
         tenant.save()
 
         domain = Domain()
-        domain.domain = f'{schema_name}.localhost'
+        domain.domain = f'{schema_name}.schoolscrm.aimagineers.io'
         domain.tenant = tenant
         domain.is_primary = True
-        
+
         domain.save()
 
         return HttpResponse("Client registered successfully!")
