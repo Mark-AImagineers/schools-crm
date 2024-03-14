@@ -6,7 +6,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', user_login, name='index'),
+    path('', index, name='index'),
     path('addtenant/', create_tenant_page, name='addtenant'),
     path('addusers/', create_users_page, name='addusers'),
 ]

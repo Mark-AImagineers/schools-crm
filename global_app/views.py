@@ -64,7 +64,7 @@ def create_users_page(request):
         context = {'tenants': tenants}
         return render(request, 'global_app/add_users.html', context)
 
-def user_login(request):
+def index(request): ##the index page is the user login page
     if request.method == "POST":
         email_address = request.POST.get('email_address')
         password = request.POST.get('password')
