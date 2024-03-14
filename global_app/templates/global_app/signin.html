@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AUTH AIMAGINEERS V2.0.0</title>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <!-- Google fonts - Popppins for copy-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+
+    <!-- The Main Theme stylesheet (Contains also Bootstrap CSS)-->
+    <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <script src="https://kit.fontawesome.com/f896476628.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid px-0 overflow-x-hidden">
+      <div class="row gx-0 min-vh-100">
+        <div class="col-md-9 col-lg-6 col-xl-4 px-5 d-flex align-items-center shadow">
+          <div class="w-100 py-5">
+            <div class="text-center"><img class="img-fluid mb-4" src="img/brand/brand-1.svg" alt="..." style="max-width: 6rem;">
+              <h1 class="h4 text-uppercase mb-5">Welcome Back</h1>
+            </div>
+            <form method="get" action="index.html">
+              <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input class="form-control" name="loginUsername" type="email" autocomplete="off">
+              </div>
+              <div class="mb-4">
+                <div class="row">
+                  <div class="col">
+                    <label class="form-label">Password</label>
+                  </div>
+                  <div class="col-auto"><a class="form-text small text-muted" href="#">Forgot your password?</a></div>
+                </div>
+                <input class="form-control" name="loginPassword" type="password">
+              </div>
+              <div class="form-check mb-4">
+                <input class="form-check-input" id="remember" type="checkbox">
+                <label class="custom-control-label" for="remember">Remember this device</label>
+              </div>
+              <!-- Submit-->
+              <div class="d-grid mb-5">
+                <button class="btn btn-primary text-uppercase">Sign in</button>
+              </div>
+              <!-- Link-->
+              <p class="text-sm text-muted text-center">
+                 Don't have an account yet? <a href="register-2.html">Register</a>.</p>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-3 col-lg-6 col-xl-8 d-none d-md-block">
+          <!-- Image-->
+          <div class="bg-cover h-100 me-n3" style="background-image: url(img/photos/victor-ene-1301123-unsplash.jpg);"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST SCRIPTS -->
+    {% include "global_components/toast.html" %}
+
+
+    <!-- GLOBAL LISTENERS -->
+    <script src="{% static 'js/globalListeners.js' %}"></script>
+
+    <!-- JavaScript files-->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Main Theme JS File-->
+    <script src="js/{% static 'js/theme.js' %}"></script>
+          
+    </script>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </body>
+</html>

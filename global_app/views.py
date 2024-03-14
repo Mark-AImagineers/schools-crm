@@ -65,4 +65,4 @@ def create_users_page(request):
         return render(request, 'global_app/add_users.html', context)
 
 def index(request):
-    return HttpResponse("<h1>Hello, La Franzella kong makulit! This is the public index</h1>")
+    return render(request, 'global_app/signin.html')
