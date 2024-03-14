@@ -28,43 +28,43 @@
     <div class="container-fluid px-0 overflow-x-hidden">
       <div class="row gx-0 min-vh-100">
         <div class="col-md-9 col-lg-6 col-xl-4 px-5 d-flex align-items-center shadow">
-          <div class="w-100 py-5">
-            <div class="text-center"><img class="img-fluid mb-4" src="https://static.wixstatic.com/media/c1aa28_caaa7bac44d64a288544766d296e41a6~mv2.png" alt="AImagineers AI software development company logo" style="max-width: 24rem;">
-              <h1 class="h4 text-uppercase mb-5">Welcome Back</h1>
-            </div>
-            <form method="get" action="index.html">
-              <div class="mb-3">
-                <label class="form-label">Email Address</label>
-                <input class="form-control" name="loginUsername" type="email" autocomplete="off">
-              </div>
-              <div class="mb-4">
-                <div class="row">
-                  <div class="col">
-                    <label class="form-label">Password</label>
-                  </div>
-                  <div class="col-auto"><a class="form-text small text-muted" href="#">Forgot your password?</a></div>
+            <div class="w-100 py-5">
+                <div class="text-center"><img class="img-fluid mb-4" src="https://static.wixstatic.com/media/c1aa28_caaa7bac44d64a288544766d296e41a6~mv2.png" alt="AImagineers AI software development company logo" style="max-width: 24rem;">
+                <h1 class="h4 text-uppercase mb-5">Welcome Back</h1>
                 </div>
-                <input class="form-control" name="loginPassword" type="password">
-              </div>
-              <div class="form-check mb-4">
-                <input class="form-check-input" id="remember" type="checkbox">
-                <label class="custom-control-label" for="remember">Remember this device</label>
-              </div>
-              <!-- Submit-->
-              <div class="d-grid mb-5">
-                <button class="btn btn-primary text-uppercase">Sign in</button>
-              </div>
-              <!-- Link-->
-              <p class="text-sm text-muted text-center">
-                 Don't have an account yet? <a href="register-2.html">Register</a>.</p>
-            </form>
-          </div>
+                <form method="post" action="{% url '' %}">  <!-- Replace 'user_login' with the actual name of your login view in urls.py -->
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="email_address" class="form-label">Email Address</label>
+                    <input class="form-control" id="email_address" name="email_address" type="email" autocomplete="off" required>
+                </div>
+                <div class="mb-4">
+                    <div class="row">
+                        <div class="col">
+                            <label for="password" class="form-label">Password</label>
+                        </div>
+                        <div class="col-auto"><a class="form-text small text-muted" href="#">Forgot your password?</a></div>
+                    </div>
+                    <input class="form-control" id="password" name="password" type="password" required>
+                </div>
+                <div class="form-check mb-4">
+                    <input class="form-check-input" id="remember" name="remember" type="checkbox">
+                    <label class="custom-control-label" for="remember">Remember this device</label>
+                </div>
+                <!-- Submit-->
+                <div class="d-grid mb-5">
+                    <button class="btn btn-primary text-uppercase" type="submit">Sign in</button>
+                </div>
+                <!-- Link-->
+                <p class="text-sm text-muted text-center">
+                    Don't have an account yet? <a href="register-2.html">Register</a>.</p>
+                </form>
+            </div>
+            <div class="col-md-3 col-lg-6 col-xl-8 d-none d-md-block">
+                <!-- Image-->
+                <div class="bg-cover h-100 me-n3" style="background-image: url(https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);"></div>
+            </div>
         </div>
-        <div class="col-md-3 col-lg-6 col-xl-8 d-none d-md-block">
-          <!-- Image-->
-          <div class="bg-cover h-100 me-n3" style="background-image: url(https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);"></div>
-        </div>
-      </div>
     </div>
 
     <!-- TOAST SCRIPTS -->

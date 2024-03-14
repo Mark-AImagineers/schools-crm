@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 from .models import *
 
@@ -64,5 +64,18 @@ def create_users_page(request):
         context = {'tenants': tenants}
         return render(request, 'global_app/add_users.html', context)
 
-def index(request):
-    return render(request, 'global_app/signin.html')
+def user_login(request):
+    if request.method == "POST":
+        email_address = request.POST.get('email_address')
+        password = request.POST.get('password')
+
+        try:
+            user = Users.objects.get(email=email_address)
+            if check_password(password, user.password):
+                return HttpResponse("Logged in successfully! Redirect me to Tenant Screen")
+            else:
+                return JsonResponse({'status': 'error', 'message': 'Invalid email or password'}, status=400)
+        except Users.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User does not exist'}, status=404)
+    else:
+        return render(request, 'global_app/signin.html')
