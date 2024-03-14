@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="tenant_name">Tenant Name:</label><br>
+        <input type="text" id="tenant_name" name="tenant_name" required><br>
+
+        <label for="on_trial">On Trial:</label><br>
+        <select id="on_trial" name="on_trial" required>
+          <option value="True">True</option>
+          <option value="False">False</option>
+        </select><br>
+
+        <label for="schema_name">Schema Name:</label><br>
+        <input type="text" id="schema_name" name="schema_name" required><br>
+
+        <input type="submit" value="Sign Up">
+    </form>
+</body>
+</html>
