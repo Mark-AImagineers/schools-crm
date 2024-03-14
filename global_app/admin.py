@@ -9,4 +9,12 @@ class TenantAdmin(admin.ModelAdmin):
 
 @admin.register(Domain)
 class DomainAdmin(admin.ModelAdmin):
-    list_display = ('domain', 'tenant_id')
+    list_display = ('domain', 'tenant')
+
+@admin.register(Users)
+class UsersAdmin(admin.ModelAdmin):
+    list_display = ('email', 'get_tenant_name')
+
+    def get_tenant_name(self, obj):
+        return obj.tenant.name
+    get_tenant_name.short_description = 'Client Name'
