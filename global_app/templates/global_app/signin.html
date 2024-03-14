@@ -32,7 +32,7 @@
                 <div class="text-center"><img class="img-fluid mb-4" src="https://static.wixstatic.com/media/c1aa28_caaa7bac44d64a288544766d296e41a6~mv2.png" alt="AImagineers AI software development company logo" style="max-width: 24rem;">
                 <h1 class="h4 text-uppercase mb-5">Welcome Back</h1>
                 </div>
-                <form method="post" action="{% url '' %}">  <!-- Replace 'user_login' with the actual name of your login view in urls.py -->
+                <form method="post" action="{% url 'index' %}">  <!-- Replace 'user_login' with the actual name of your login view in urls.py -->
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="email_address" class="form-label">Email Address</label>
