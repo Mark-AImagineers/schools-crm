@@ -11,10 +11,7 @@ class TenantAdmin(admin.ModelAdmin):
 class DomainAdmin(admin.ModelAdmin):
     list_display = ('domain', 'tenant')
 
-@admin.register(Users)
-class UsersAdmin(admin.ModelAdmin):
-    list_display = ('email', 'get_tenant_name')
-
-    def get_tenant_name(self, obj):
-        return obj.tenant.name
-    get_tenant_name.short_description = 'Client Name'
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'tenant'] 
+    search_fields = ['user__username', 'tenant__name'] 

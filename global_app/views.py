@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import *
 
@@ -34,35 +34,15 @@ def create_tenant_page(request):
         return render(request, 'global_app/add_tenant.html')
 
 def create_users_page(request):
+    form = CreateUserForm()
+
     if request.method == "POST":
-        email = request.POST.get('email')
-
-        # Handle the case where a user with this email already exists
-        if Users.objects.filter(email=email).exists():
-            return HttpResponse('A user with this email already exists.', status=400)
-
-        # Else, create a new user
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        password = make_password(request.POST.get('password').strip())  # Hash the password
-        tenant_id = request.POST.get('tenant')
-        tenant = Client.objects.get(id=tenant_id)
-
-        user = Users(first_name=first_name, 
-                     last_name=last_name, 
-                     email=email, 
-                     password=password, 
-                     tenant=tenant, 
-                     created_on=timezone.now()
-                     )
-        
-        user.save()
-
-        return HttpResponse("<h1>Franzelle: The user was saved in DB</h1>")
-    else:
-        tenants = Client.objects.all()  # Fetch all tenants for the dropdown
-        context = {'tenants': tenants}
-        return render(request, 'global_app/add_users.html', context)
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+    context = {'form': form}
+    return render(request, 'global_app/add_users.html', context)
 
 def index(request): ##the index page is the user login page
     if request.method == "POST":

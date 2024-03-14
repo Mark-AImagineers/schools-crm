@@ -1,7 +1,11 @@
 from django.db import models
 from django_tenants.models import TenantMixin, DomainMixin
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 from django.utils import timezone
+
+from django.contrib.auth.models import User
+User = get_user_model()
 
 # Create your models here.
 
@@ -19,16 +23,14 @@ class Client(TenantMixin):
 class Domain(DomainMixin):
     pass
 
-class Users(models.Model):
-    first_name = models.CharField(max_length=100,default=False)
-    last_name = models.CharField(max_length=100,default=False)
-    email = models.CharField(max_length=100,default=False)
-    tenant = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='users')
-    password = models.CharField(max_length=100,default=False)
-    created_on = models.DateTimeField(auto_now_add=False, default=timezone.now)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    tenant = models.ForeignKey(Client, on_delete=models.CASCADE)
 
-    def save(self, *args, **kwargs):
-        # Hash the password only if it's a new instance or the password has been changed.
-        if not self.pk or 'password' in kwargs.get('update_fields', []):
-            self.password = make_password(self.password)
-        super().save(*args, **kwargs)
+    def __str__(self) -> str:
+        return self.user.username
+
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
