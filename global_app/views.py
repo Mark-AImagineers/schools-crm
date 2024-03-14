@@ -44,7 +44,7 @@ def create_users_page(request):
         # Else, create a new user
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        password = make_password(request.POST.get('password'))  # Hash the password
+        password = make_password(request.POST.get('password').strip())  # Hash the password
         tenant_id = request.POST.get('tenant')
         tenant = Client.objects.get(id=tenant_id)
 
@@ -67,10 +67,21 @@ def create_users_page(request):
 def index(request): ##the index page is the user login page
     if request.method == "POST":
         email_address = request.POST.get('email_address')
-        password = request.POST.get('password')
+        password = request.POST.get('password').strip()
+
+        print(f"Attempting login with email: {email_address}")
+        
+        
+        print(f"The password in the db {password}")
 
         try:
             user = Users.objects.get(email=email_address)
+
+            print(f"User found in DB: {user.email}")
+            print(f"the password that the user input is: {password}")
+            print(f"The password when hashed is CODED: {make_password(password)}")
+            print(f"Hashed password from DB: {user.password}")
+
             if check_password(password, user.password):
                 return HttpResponse("Logged in successfully! Redirect me to Tenant Screen")
             else:
