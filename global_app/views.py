@@ -54,9 +54,9 @@ def index(request): ##the index page is the user login page
 
         if user is not None:
             login(request, user)
-            return redirect('somepage here')
+            return redirect('dashboard')
         else:
-            redirect('another page here')
+            print("Invalid username or password")
     
     context = {}
     return render(request, 'global_app/signin.html', context)

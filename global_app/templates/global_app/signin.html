@@ -34,8 +34,8 @@
                         <form method="post" action="{% url 'index' %}">  <!-- Replace 'user_login' with the actual name of your login view in urls.py -->
                             {% csrf_token %}
                             <div class="mb-3">
-                                <label for="user_name" class="form-label">Username</label>
-                                <input class="form-control" id="user_name" name="user_name" type="text" autocomplete="off" required>
+                                <label for="username" class="form-label">Username</label>
+                                <input class="form-control" id="username" name="username" type="text" autocomplete="off" required>
                             </div>
                             <div class="mb-4">
                                 <div class="row">
