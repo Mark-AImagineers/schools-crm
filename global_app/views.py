@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 
 from .models import *
 
@@ -46,27 +47,16 @@ def create_users_page(request):
 
 def index(request): ##the index page is the user login page
     if request.method == "POST":
-        email_address = request.POST.get('email_address')
-        password = request.POST.get('password').strip()
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        print(f"Attempting login with email: {email_address}")
-        
-        
-        print(f"The password in the db {password}")
+        user = authenticate(request, username=username, password=password)
 
-        try:
-            user = Users.objects.get(email=email_address)
-
-            print(f"User found in DB: {user.email}")
-            print(f"the password that the user input is: {password}")
-            print(f"The password when hashed is CODED: {make_password(password)}")
-            print(f"Hashed password from DB: {user.password}")
-
-            if check_password(password, user.password):
-                return HttpResponse("Logged in successfully! Redirect me to Tenant Screen")
-            else:
-                return JsonResponse({'status': 'error', 'message': 'Invalid email or password'}, status=400)
-        except Users.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': 'User does not exist'}, status=404)
-    else:
-        return render(request, 'global_app/signin.html')
+        if user is not None:
+            login(request, user)
+            return redirect('somepage here')
+        else:
+            redirect('another page here')
+    
+    context = {}
+    return render(request, 'global_app/login.html', context)
