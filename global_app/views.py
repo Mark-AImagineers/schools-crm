@@ -59,4 +59,4 @@ def index(request): ##the index page is the user login page
             redirect('another page here')
     
     context = {}
-    return render(request, 'global_app/login.html', context)
+    return render(request, 'global_app/signin.html', context)
