@@ -54,7 +54,7 @@ def index(request): ##the index page is the user login page
 
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
+            return redirect('/dashboard/')
         else:
             print("Invalid username or password")
     
