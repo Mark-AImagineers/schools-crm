@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'global_app.middleware.TenantRoutingMiddleware', #custom middleware for tenant routing after login
     'django.contrib.messages.middleware.MessageMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

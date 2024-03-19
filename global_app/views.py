@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as auth_login
 
 from .models import *
+from .forms import *
 
 # Create your views here.
 def create_tenant_page(request):
@@ -35,10 +36,10 @@ def create_tenant_page(request):
         return render(request, 'global_app/add_tenant.html')
 
 def create_users_page(request):
-    form = CreateUserForm()
+    form = CreateUserFormWithTenant()
 
     if request.method == "POST":
-        form = CreateUserForm(request.POST)
+        form = CreateUserFormWithTenant(request.POST)
         if form.is_valid():
             form.save()
             
@@ -46,6 +47,10 @@ def create_users_page(request):
     return render(request, 'global_app/add_users.html', context)
 
 def index(request): ##the index page is the user login page
+    return redirect('')
+
+
+def login_view(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -53,10 +58,10 @@ def index(request): ##the index page is the user login page
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, user)
-            return redirect('/dashboard/')
+            auth_login(request, user)  # Use the renamed auth_login here
+            return redirect('dashboard')
         else:
-            print("Invalid username or password")
+            # It's better to use messages framework for user feedback
+            return HttpResponse("Invalid username or password.")
     
-    context = {}
-    return render(request, 'global_app/signin.html', context)
+    return render(request, 'global_app/signin.html')
